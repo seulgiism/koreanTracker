@@ -1,4 +1,4 @@
-#include "../katarray.h"
+#include "katarray.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -35,7 +35,7 @@ void katarray_voidp_length_print(katarray_voidp_t *KatArray, char option) {
         // list
         printf("[");
         for (size_t i = 0; i < KatArray->length; i++) {
-            printf(" %hd", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
+            printf(" %p", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
             if (i < KatArray->length - 1) {
                 printf(",");
             }
@@ -45,7 +45,7 @@ void katarray_voidp_length_print(katarray_voidp_t *KatArray, char option) {
     else {
         printf("[");
         for (size_t i = 0; i < KatArray->length; i++) {
-            printf(" %hd", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
+            printf(" %p", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
             if (i < KatArray->length - 1) {
                 printf(",");
             }
@@ -72,7 +72,7 @@ void katarray_voidp_capacity_print(katarray_voidp_t *KatArray, char option) {
         // list
         printf("[");
         for (size_t i = 0; i < KatArray->capacity; i++) {
-            printf(" %hd", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
+            printf(" %p", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
             if (i < KatArray->capacity - 1) {
                 printf(",");
             }
@@ -82,7 +82,7 @@ void katarray_voidp_capacity_print(katarray_voidp_t *KatArray, char option) {
     else {
         printf("[");
         for (size_t i = 0; i < KatArray->capacity; i++) {
-            printf(" %hd", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
+            printf(" %p", KatArray->list[(KatArray->index_start + i) % KatArray->capacity]);
             if (i < KatArray->capacity - 1) {
                 printf(",");
             }
@@ -115,16 +115,16 @@ void katarray_voidp_debug_print(katarray_voidp_t *KatArray, char option) {
         for (size_t i = 0; i < KatArray->capacity; i++) {
             // color picking for index start and index end
             if (i == index_start && i == index_end) {
-                fprintf(stderr, ORANGE" %hd"END, KatArray->list[i]);
+                fprintf(stderr, ORANGE" %p"END, KatArray->list[i]);
             }
             else if (i == index_start) {
-                fprintf(stderr, GREEN" %hd"END, KatArray->list[i]);
+                fprintf(stderr, GREEN" %p"END, KatArray->list[i]);
             }
             else if (i == index_end) {
-                fprintf(stderr, RED" %hd"END, KatArray->list[i]);
+                fprintf(stderr, RED" %p"END, KatArray->list[i]);
             }
             else {
-                fprintf(stderr, " %hd", KatArray->list[i]);
+                fprintf(stderr, " %p", KatArray->list[i]);
             }
 
             // print comma
@@ -137,7 +137,7 @@ void katarray_voidp_debug_print(katarray_voidp_t *KatArray, char option) {
     else {
         fprintf(stderr, "[");
         for (size_t i = 0; i < KatArray->capacity; i++) {
-            fprintf(stderr, " %hd", KatArray->list[i]);
+            fprintf(stderr, " %p", KatArray->list[i]);
             if (i < KatArray->capacity - 1) {
                 fprintf(stderr, ",");
             }
@@ -152,6 +152,7 @@ void katarray_voidp_debug_print(katarray_voidp_t *KatArray, char option) {
 
 // shrinkable -> shrinkable > 0
 // create arraylist
+/*
 katarray_voidp_t *katarray_voidp_create(size_t length, void* initial_value, size_t capacity, char shrinkable) {
     if (length > capacity) {
         length = capacity;
@@ -186,14 +187,17 @@ katarray_voidp_t *katarray_voidp_create(size_t length, void* initial_value, size
 
     return KatArray;
 }
+*/
 
 // free arraylist
+/*
 void katarray_voidp_free(katarray_voidp_t *KatArray) {
     free(KatArray->list);
     free(KatArray);
 
     return;
 }
+*/
 
 // resize arraylist
 void katarray_voidp_resize(katarray_voidp_t **KatArray, double growth_factor, size_t add_factor) {
@@ -571,7 +575,7 @@ void* katarray_voidp_get_value_at(katarray_voidp_t *KatArray, size_t index) {
         return KatArray->list[(index + KatArray->index_start) % KatArray->capacity];
     }
 
-    else return -1;
+    else return NULL;
 }
 
 // get value at start index

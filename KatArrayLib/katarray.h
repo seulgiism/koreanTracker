@@ -786,7 +786,20 @@ char            katarray_ushort_is_empty(katarray_ushort_t *KatArray);
 
 ////* VOID POINTER LIB *////
 
-typedef struct KatArray_voidp {
+//typedef struct KatArray_voidp {
+//    size_t length;
+//    size_t capacity;
+
+//    size_t index_start;
+//    size_t index_end;
+
+//    char shrinkable;
+//    void* initial_value;
+//    void* *list;
+//} katarray_voidp_t;
+
+#define KATARRAY_CAPACITY 50
+typedef struct KatArray{
     size_t length;
     size_t capacity;
 
@@ -795,7 +808,7 @@ typedef struct KatArray_voidp {
 
     char shrinkable;
     void* initial_value;
-    void* *list;
+    void* list[KATARRAY_CAPACITY];
 } katarray_voidp_t;
 
 // (printers) //

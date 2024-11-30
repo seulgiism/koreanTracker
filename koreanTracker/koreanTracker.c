@@ -2,26 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../KatArrayLib/katarray.h"
 
+// structure for koreandata, the katarray will point to koreandata structs
 typedef struct KoreanData{
     short watches;
     char* name;
     char* link;
 } korean_data_t;
 
-
 #define KATARRAY_CAPACITY 50
-typedef struct KatArray{
-    size_t length;
-    size_t capacity;
+//typedef struct KatArray{
+//    size_t length;
+//    size_t capacity;
 
-    size_t index_start;
-    size_t index_end;
+//    size_t index_start;
+//    size_t index_end;
 
-    char shrinkable;
-    void* initial_value;
-    void* list[KATARRAY_CAPACITY];
-} katarray_voidp_t;
+//    char shrinkable;
+//    void* initial_value;
+//    void* list[KATARRAY_CAPACITY];
+//} katarray_voidp_t;
+
 
 // main functions for add, rm, show, increment
 void instruction_add();
