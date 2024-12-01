@@ -152,7 +152,6 @@ void katarray_voidp_debug_print(katarray_voidp_t *KatArray, char option) {
 
 // shrinkable -> shrinkable > 0
 // create arraylist
-/*
 katarray_voidp_t *katarray_voidp_create(size_t length, void* initial_value, size_t capacity, char shrinkable) {
     if (length > capacity) {
         length = capacity;
@@ -168,9 +167,9 @@ katarray_voidp_t *katarray_voidp_create(size_t length, void* initial_value, size
 
     // malloc the KatArray->list with capacity
     KatArray->list = malloc_wrapper(capacity * sizeof(*(KatArray->list)), __func__);
-
+    
     // memset list to initial_value
-    memset(KatArray->list, initial_value, capacity * sizeof(*(KatArray->list)));
+    for (size_t i = 0; i < capacity; i++) KatArray->list[i] = initial_value;
 
     // initialize all vars
     KatArray->length          = length;
@@ -187,17 +186,14 @@ katarray_voidp_t *katarray_voidp_create(size_t length, void* initial_value, size
 
     return KatArray;
 }
-*/
 
 // free arraylist
-/*
 void katarray_voidp_free(katarray_voidp_t *KatArray) {
     free(KatArray->list);
     free(KatArray);
 
     return;
 }
-*/
 
 // resize arraylist
 void katarray_voidp_resize(katarray_voidp_t **KatArray, double growth_factor, size_t add_factor) {

@@ -744,8 +744,8 @@ void            katarray_ushort_capacity_prshort(katarray_ushort_t *KatArray, ch
 void            katarray_ushort_debug_prshort(katarray_ushort_t *KatArray, char option);
 
 // (management) //
-katarray_ushort_t *katarray_ushort_create(size_t length, unsigned short initial_value, size_t capacity, char shrinkable);
-void            katarray_ushort_free(katarray_ushort_t *KatArray);
+//katarray_ushort_t *katarray_ushort_create(size_t length, unsigned short initial_value, size_t capacity, char shrinkable);
+//void            katarray_ushort_free(katarray_ushort_t *KatArray);
 void            katarray_ushort_resize(katarray_ushort_t **KatArray, double growth_factor, size_t add_factor);
 void            katarray_ushort_convert(katarray_ushort_t **KatArray);
 void            katarray_ushort_reset(katarray_ushort_t **KatArray, size_t length, size_t capacity);
@@ -786,20 +786,7 @@ char            katarray_ushort_is_empty(katarray_ushort_t *KatArray);
 
 ////* VOID POINTER LIB *////
 
-//typedef struct KatArray_voidp {
-//    size_t length;
-//    size_t capacity;
-
-//    size_t index_start;
-//    size_t index_end;
-
-//    char shrinkable;
-//    void* initial_value;
-//    void* *list;
-//} katarray_voidp_t;
-
-#define KATARRAY_CAPACITY 50
-typedef struct KatArray{
+typedef struct KatArray_voidp {
     size_t length;
     size_t capacity;
 
@@ -808,7 +795,7 @@ typedef struct KatArray{
 
     char shrinkable;
     void* initial_value;
-    void* list[KATARRAY_CAPACITY];
+    void* *list;
 } katarray_voidp_t;
 
 // (printers) //
