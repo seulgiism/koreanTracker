@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "text_encoding": "c",
+        "thread": "c",
+        "katarray.h": "c"
     }
 }

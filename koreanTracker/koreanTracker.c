@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "../KatArrayLib/katarray.h"
 
@@ -15,7 +16,7 @@ typedef struct KoreanData{
 
 // main functions for add, rm, show, increment
 void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char* link);
-void instruction_rm();
+void instruction_rm(katarray_voidp_t *KatArray, short id);
 void instruction_show();
 void instruction_increment();
 
@@ -37,6 +38,9 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 #define KOREANDATA_FORMAT_SCANF "[%hd, %35[^,], %100[^]]\n"   // watches, name, link
 #define WATCHLIST_FORMAT_PRINT "{ %s | %s | %s }\n" // name, date, link
 
+#define PATH_TO_REPLIST "./koreanTracker/rep-list.dat"
+#define PATH_TO_WATCHEDLIST "./koreanTracker/watched-list.txt"
+
 FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* function_name);
 void katarray_deserialize_replist(katarray_voidp_t *KatArray);
 void katarray_serialize_replist(katarray_voidp_t *KatArray);
@@ -51,12 +55,11 @@ void time_str_set(char* time_str_buffer);
 
 int main(int argc, char** argv) {
     argc = (short)argc;
-    //argc = 6;
-    //argv[1] = strdup("add");
-    //argv[2] = strdup("-w");
+    //argc = 4;
+    //argv[1] = strdup("rm");
+    //argv[2] = strdup("-i");
     //argv[3] = strdup("1");
-    //argv[4] = strdup("-n");
-    //argv[5] = strdup("bambi");
+    
 
 
     // entrance to add, remove, show, increment, help
@@ -76,7 +79,7 @@ int main(int argc, char** argv) {
 
             // quit if no name is given
             if (name == NULL) {
-                perror("you forgot to put a name dummy");
+                perror("you forgot to put a name dummy\n\n");
                 exit(EXIT_FAILURE);
             }
 
@@ -89,11 +92,14 @@ int main(int argc, char** argv) {
         else if (strcmp(argv[1], "rm") == 0) {
             
             // store flags
-            short id = 0;
+            short id = -1;
             argv_set_flags_rm(argv, argc, &id);
 
             
-
+            
+            // rm the entry
+            instruction_rm(KatArray_KoreanData, id);
+            
         }
 
         // SHOW feature
@@ -113,10 +119,16 @@ int main(int argc, char** argv) {
             // store flags
             short id = 0;
             argv_set_flags_increment(argv, argc, &id);
+        }
 
-            
+        else if (strcmp(argv[1], "logs") == 0) {
 
-            
+            // execute cat on watched-list.txt
+            char *cat_arg[] = {"cat", "watched-list.txt", NULL};
+            execvp("cat", cat_arg);
+
+            // if execvp fails
+            perror("execvp failed");
         }
 
         else {
@@ -172,7 +184,36 @@ void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char
     return;
 }
 
+// rm instruction
+void instruction_rm(katarray_voidp_t *KatArray, short id) {
+    
+    // deserialize rep-list.dat to katarray
+    katarray_deserialize_replist(KatArray);
 
+    // quit if no id is given
+    if (id < 0 || id >= (short)KatArray->length) {
+        perror("you forgot to give me the id smh..\nor you're trying to pull some tricks with those out of bounders!\n\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // free pointer
+    korean_data_t *rm_data = katarray_voidp_get_value_at(KatArray, id);
+    if (rm_data) {
+        free(rm_data->name);
+        free(rm_data->link);
+        free(rm_data);
+    }
+    
+
+    // remove from katarray pointer from katarray
+    katarray_voidp_remove_overwrite_at(&KatArray, id);
+
+
+    // serialize object
+    katarray_serialize_replist(KatArray);
+
+    return;
+}
 
 ////* command line flag position storer *////
 
@@ -187,7 +228,6 @@ void argv_set_flags_add(char **argv, short argc, char** name, char** link, short
         if (((strcmp(argv[i], "--watches") == 0) || (strcmp(argv[i], "-w") == 0)) && (i + 1) < argc) *watched = (short)(atoi(argv[i+1]));
     }
 }
-
 
 // will store the positions of add flags into the vars
 // 0 means it was not found
@@ -225,7 +265,14 @@ void katarray_free(katarray_voidp_t *KatArray) {
     
     // free pointers
     for (short i = 0; i < (short)KatArray->length; i++) {
+
+        // get ptr
         korean_data_t *korean_data_ptr = katarray_voidp_get_value_at(KatArray, i);
+
+        // quit if null
+        if (!korean_data_ptr) continue;
+
+        // free up
         free(korean_data_ptr->name);
         free(korean_data_ptr->link);
         free(korean_data_ptr);
