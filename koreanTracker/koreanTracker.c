@@ -123,9 +123,8 @@ int main(int argc, char** argv) {
 
         else if (strcmp(argv[1], "logs") == 0) {
 
-            // execute cat on watched-list.txt
-            char *cat_arg[] = {"cat", "watched-list.txt", NULL};
-            execvp("cat", cat_arg);
+            char *cat_args[] = {"cat", PATH_TO_WATCHEDLIST, NULL};
+            execvp("cat", cat_args);
 
             // if execvp fails
             perror("execvp failed");
@@ -301,7 +300,7 @@ FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* functio
 void katarray_deserialize_replist(katarray_voidp_t *KatArray) {
     
     // open rep-list.dat
-    FILE* file = fopen_wrapper("./koreanTracker/rep-list.dat", "r", __func__);
+    FILE* file = fopen_wrapper(PATH_TO_REPLIST, "r", __func__);
 
     // stop when end of file
     while (!feof(file)) {
@@ -337,7 +336,7 @@ void katarray_deserialize_replist(katarray_voidp_t *KatArray) {
 void katarray_serialize_replist(katarray_voidp_t *KatArray) {
     
     // open rep-list.dat
-    FILE* file = fopen_wrapper("./koreanTracker/rep-list.dat", "w", __func__);
+    FILE* file = fopen_wrapper(PATH_TO_REPLIST, "w", __func__);
 
     for (short i = 0; i < (short)KatArray->length; i++) {
         
@@ -358,7 +357,7 @@ void katarray_serialize_replist(katarray_voidp_t *KatArray) {
 void write_log_entry_watchedlist(korean_data_t *korean_data) {
     
     // open watched-list.txt
-    FILE* file = fopen_wrapper("./koreanTracker/watched-list.txt", "a", __func__);
+    FILE* file = fopen_wrapper(PATH_TO_WATCHEDLIST, "a", __func__);
 
     // get current time into string
     #define TIME_STR_SIZE 11
