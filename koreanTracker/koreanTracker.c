@@ -49,12 +49,12 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 
 // file handling
 #define KOREANDATA_FORMAT_PRINT "[%hd, %s, %s]\n" // watches, name, link
-#define KOREANDATA_FORMAT_SCANF "[%hd, %35[^,], %100[^]]\n"   // watches, name, link
+#define KOREANDATA_FORMAT_SCANF "[%hd, %199[^,], %499[^]]\n"   // watches, name, link
 #define WATCHLIST_FORMAT_PRINT "{ %s | %s | %s }\n" // name, date, link
 
-#define PATH_TO_REPLIST "./koreanTracker/rep-list.dat"
-#define PATH_TO_WATCHEDLIST "./koreanTracker/watched-list.txt"
-#define PATH_TO_README "./README.md"
+#define PATH_TO_REPLIST "/home/katarina/repos/koreanTracker/koreanTracker/rep-list.dat"
+#define PATH_TO_WATCHEDLIST "/home/katarina/repos/koreanTracker/koreanTracker/watched-list.txt"
+#define PATH_TO_README "/home/katarina/repos/koreanTracker/README.md"
 
 FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* function_name);
 void katarray_deserialize_replist(katarray_voidp_t *KatArray);
@@ -332,7 +332,7 @@ void watches_to_xformat(char *watches_str, short watches) {
     }
     else {
 
-        short i;
+        short i = 0;
         while (i < watches) {
             watches_str[i] = 'X';
             i++;
@@ -464,8 +464,8 @@ void katarray_deserialize_replist(katarray_voidp_t *KatArray) {
         
         // allocate korean_data
         korean_data_t *korean_data_ptr = malloc_wrapper(sizeof(*korean_data_ptr), __func__);
-        korean_data_ptr->name = malloc_wrapper(35, __func__);
-        korean_data_ptr->link = malloc_wrapper(100, __func__);
+        korean_data_ptr->name = malloc_wrapper(200, __func__);
+        korean_data_ptr->link = malloc_wrapper(500, __func__);
 
         // save file's objects into korean_data_struct
         if (fscanf(file, KOREANDATA_FORMAT_SCANF, &(korean_data_ptr->watches), korean_data_ptr->name, korean_data_ptr->link) == EOF) {

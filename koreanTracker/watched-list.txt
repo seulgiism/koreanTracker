@@ -1,1 +1,4 @@
-{ hello | 2024-12-02 | no_string }
+{ test.dat | 2024-12-02 | https://tester.com }
+{ [Super BEGINNER] 윤지는 학교에 가요 | 2024-12-02 | https://www.youtube.com/watch?v=o6AP3nVNj_8&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=10 }
+{ [Super BEGINNER] 윤지는 학교에 가요 | 2024-12-02 | https://www.youtube.com/watch?v=o6AP3nVNj_8&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=10 }
+{ [Super BEGINNER] 윤지는 학교에 가요 | 2024-12-02 | https://www.youtube.com/watch?v=o6AP3nVNj_8&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=10 }

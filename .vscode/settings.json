@@ -3,6 +3,7 @@
         "stdio.h": "c",
         "text_encoding": "c",
         "thread": "c",
-        "katarray.h": "c"
+        "katarray.h": "c",
+        "katarray_helper.h": "c"
     }
 }
