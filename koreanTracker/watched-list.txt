@@ -6,3 +6,9 @@
 { noom | 2024-12-01 | https://bin.com }
 { noom | 2024-12-01 | https://bin.com }
 { bambi | 2024-12-01 | no_string }
+{ one piece ep1 | 2024-12-02 | https://onepiece.com }
+{ mommers ep 1 | 2024-12-02 | https://mommeras.com }
+{ 3 | 2024-12-02 | no_string }
+{ 3 | 2024-12-02 | no_string }
+{ noomer | 2024-12-02 | no_string }
+{ noomer | 2024-12-02 | no_string }

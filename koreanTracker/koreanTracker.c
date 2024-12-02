@@ -6,6 +6,17 @@
 
 #include "../KatArrayLib/katarray.h"
 
+// ANSI COLORS
+#define RED "\033[31m"
+#define ORANGE "\033[38;5;208m"
+#define YELLOW "\033[33m"
+#define GREEN "\033[32m"
+#define BLUE "\033[36m"
+#define INDIGO "\033[38;5;54m"
+#define PURPLE "\033[35m"
+
+#define RESET "\033[0m"
+
 // structure for koreandata, the katarray will point to koreandata structs
 typedef struct KoreanData{
     short watches;
@@ -17,9 +28,12 @@ typedef struct KoreanData{
 // main functions for add, rm, show, increment
 void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char* link);
 void instruction_rm(katarray_voidp_t *KatArray, short id);
-void instruction_show();
-void instruction_increment();
+void instruction_show(katarray_voidp_t *KatArray, short id);
+void instruction_increment(katarray_voidp_t *KatArray, short id);
 
+
+// helper for show
+void watches_to_xformat(char *watches_str, short watches);
 
 // will store the positions of add flags into the vars
 // 0 means it was not found
@@ -59,8 +73,6 @@ int main(int argc, char** argv) {
     //argv[1] = strdup("rm");
     //argv[2] = strdup("-i");
     //argv[3] = strdup("1");
-    
-
 
     // entrance to add, remove, show, increment, help
     if (argc > 1) {
@@ -80,12 +92,18 @@ int main(int argc, char** argv) {
             // quit if no name is given
             if (name == NULL) {
                 perror("you forgot to put a name dummy\n\n");
+                katarray_free(KatArray_KoreanData);
                 exit(EXIT_FAILURE);
             }
 
             // perform ADD instruction
             instruction_add(KatArray_KoreanData, watched, name, link);
 
+            // clear array for show instruction
+            katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
+
+            // show update
+            instruction_show(KatArray_KoreanData, -1);
         }
 
         // REMOVE feature
@@ -95,30 +113,42 @@ int main(int argc, char** argv) {
             short id = -1;
             argv_set_flags_rm(argv, argc, &id);
 
-            
-            
             // rm the entry
             instruction_rm(KatArray_KoreanData, id);
-            
+
+            // clear array for show instruction
+            katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
+
+            // show update
+            instruction_show(KatArray_KoreanData, -1);
         }
 
         // SHOW feature
         else if (strcmp(argv[1], "show") == 0) {
             
             // store flags
-            short id = 0;
+            short id = -1;
             argv_set_flags_show(argv, argc, &id);
 
-            
-
+            // show entry or a specific id's full entry
+            instruction_show(KatArray_KoreanData, id);
         }
 
         // INCREMENT feature
-        else if (strcmp(argv[1], "increment") == 0) {
+        else if (strcmp(argv[1], "inc") == 0) {
 
             // store flags
-            short id = 0;
+            short id = -1;
             argv_set_flags_increment(argv, argc, &id);
+            
+            // increment watches of id's entry
+            instruction_increment(KatArray_KoreanData, id);
+
+            // clear array for show instruction
+            katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
+
+            // show update
+            instruction_show(KatArray_KoreanData, -1);
         }
 
         else if (strcmp(argv[1], "logs") == 0) {
@@ -192,6 +222,7 @@ void instruction_rm(katarray_voidp_t *KatArray, short id) {
     // quit if no id is given
     if (id < 0 || id >= (short)KatArray->length) {
         perror("you forgot to give me the id smh..\nor you're trying to pull some tricks with those out of bounders!\n\n");
+        katarray_free(KatArray);
         exit(EXIT_FAILURE);
     }
 
@@ -213,6 +244,129 @@ void instruction_rm(katarray_voidp_t *KatArray, short id) {
 
     return;
 }
+
+// show instruction
+void instruction_show(katarray_voidp_t *KatArray, short id) {
+
+    // deserialize rep-list.dat to katarray
+    katarray_deserialize_replist(KatArray);
+
+    printf("<3---------------------------------<3\n\n");
+    // id was given, print out the id with the link
+    if (id >= 0) {
+
+        // quit if no id is given
+        if (id >= (short)KatArray->length) {
+            perror("you forgot to give me the id smh..\nor you're trying to pull some tricks with those out of bounders!\n\n");
+            katarray_free(KatArray);
+            exit(EXIT_FAILURE);
+        }
+
+        korean_data_t *data_ptr = katarray_voidp_get_value_at(KatArray, id);
+        
+        // calculate the X's 
+        char *watches_x_str = malloc_wrapper(10, __func__);
+        watches_to_xformat(watches_x_str, data_ptr->watches);
+
+        // print out the str
+        printf(RED " %2hd: %4s %s | %s\n" RESET, id, watches_x_str, data_ptr->name, data_ptr->link);
+
+        free(watches_x_str);
+    }
+
+    // no id was given, print out the whole list without links
+    else {
+
+        for (short i = 0; i < (short)KatArray->length; i++) {
+            
+            // get curr ptr at id
+            korean_data_t *data_ptr = katarray_voidp_get_value_at(KatArray, i);
+        
+            // calculate the X's 
+            char *watches_x_str = malloc_wrapper(10, __func__);
+            watches_to_xformat(watches_x_str, data_ptr->watches);    
+
+            switch (data_ptr->watches) {
+                case 1:
+                    printf(BLUE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    break;
+                case 2:
+                    printf(GREEN" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    break;
+                case 3:
+                    printf(YELLOW" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    break;
+                case 4:
+                    printf(ORANGE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    break;
+                case 5:
+                    printf(RED" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    break;
+                case 6:
+                    printf(INDIGO" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    break;
+                default:
+                    printf(PURPLE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    break;
+            }
+
+            free(watches_x_str);    
+        }
+    } 
+        printf("\n<3---------------------------------<3\n\n");
+    
+    return;
+}
+
+// watches converter to X
+void watches_to_xformat(char *watches_str, short watches) {
+    
+    if (watches > 4) {
+
+        watches_str[0] = '0' + (char)watches;
+        watches_str[1] = '\0';
+        return;
+    }
+    else {
+
+        short i;
+        while (i < watches) {
+            watches_str[i] = 'X';
+            i++;
+        }
+        watches_str[i] = '\0';
+
+        return;
+    }
+}
+
+// increment instruction
+void instruction_increment(katarray_voidp_t *KatArray, short id) {
+
+    // deserialize rep-list.dat to katarray
+    katarray_deserialize_replist(KatArray);
+
+    // check if id is valid
+    if (id < 0 || id >= (short)KatArray->length) {
+        perror("you forgot to give me the id smh..\nor you're trying to pull some tricks with those out of bounders!\n\n");
+        katarray_free(KatArray);
+        exit(EXIT_FAILURE);
+    }
+
+    // get the dataptr at id
+    korean_data_t *data_ptr = katarray_voidp_get_value_at(KatArray, id);
+    data_ptr->watches++;
+
+    // set the katarray's dataptr to NULL
+    katarray_voidp_remove_overwrite_at(&KatArray, id);
+
+    // put the data's new watches in the correct place
+    katarray_insert_sorted(KatArray, data_ptr);
+
+    // serialize object
+    katarray_serialize_replist(KatArray);
+}
+
 
 ////* command line flag position storer *////
 
