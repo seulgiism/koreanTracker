@@ -44,6 +44,13 @@ DESCRIPTION
                 id of entry to be incremented
 
         
+        koreantrack logs
+            used to log all entries ever added, 
+            it cats watched-list.txt in koreanTracker/
+            you can modify the file however you want or add entries manually,
+            this will not interfere with any of koreantracker
+
+        
         koreantrack -h, --h
             will show this file
 ```
