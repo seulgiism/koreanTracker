@@ -54,6 +54,7 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 
 #define PATH_TO_REPLIST "./koreanTracker/rep-list.dat"
 #define PATH_TO_WATCHEDLIST "./koreanTracker/watched-list.txt"
+#define PATH_TO_README "./README.md"
 
 FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* function_name);
 void katarray_deserialize_replist(katarray_voidp_t *KatArray);
@@ -164,10 +165,12 @@ int main(int argc, char** argv) {
 
             // HELP feature
             if (strcmp(argv[1], "-h") || strcmp(argv[1], "--help")) {
-                
-            }
+                char *cat_args[] = {"cat", PATH_TO_README, NULL};
+                execvp("less", cat_args);
 
-            
+                // if execvp fails
+                perror("execvp failed");
+            }
         }
 
         katarray_free(KatArray_KoreanData);
