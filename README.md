@@ -1,3 +1,6 @@
+!!!! please change the paths in koreanTracker.c to your paths,
+!!!! relative paths ensure that your path works when you put it in your binaries or link it in path variable
+
 ```
 NAME
         koreantrack - logs and tracks watches of videos
