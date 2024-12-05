@@ -103,6 +103,7 @@ int main(int argc, char** argv) {
             instruction_add(KatArray_KoreanData, watched, name, link);
 
             // clear array for show instruction
+            katarray_free(KatArray_KoreanData);
             katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
 
             // show update
@@ -120,6 +121,7 @@ int main(int argc, char** argv) {
             instruction_rm(KatArray_KoreanData, id);
 
             // clear array for show instruction
+            katarray_free(KatArray_KoreanData);
             katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
 
             // show update
@@ -148,6 +150,7 @@ int main(int argc, char** argv) {
             instruction_increment(KatArray_KoreanData, id);
 
             // clear array for show instruction
+            katarray_free(KatArray_KoreanData);
             katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
 
             // show update

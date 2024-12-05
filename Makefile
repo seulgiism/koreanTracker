@@ -14,3 +14,5 @@ $(OUT): $(APP_SRCS) $(LIB_SRCS)
 
 clean:
 	rm -f $(OUT)
+
+re: clean all

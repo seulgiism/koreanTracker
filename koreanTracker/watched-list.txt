@@ -12,3 +12,4 @@
 { [BEGINNER] {1} 우리 가족 | 2024-12-04 | https://www.youtube.com/watch?v=tpnmeXH9VZ4&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2 }
 { [BEGINNER] {2} 동네 공원 | 2024-12-05 | https://www.youtube.com/watch?v=gQ-4AVWYNJI&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2&t=48s }
 { [BEGINNER] {3} 저녁 일상 | 2024-12-05 | https://www.youtube.com/watch?v=ZTwmL9hSbX0&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=4 }
+{ hhhhh | 2024-12-05 | fwoajfioawjfiwaf }
