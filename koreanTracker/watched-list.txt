@@ -1,4 +1,14 @@
-{ test.dat | 2024-12-02 | https://tester.com }
 { [Super BEGINNER] 윤지는 학교에 가요 | 2024-12-02 | https://www.youtube.com/watch?v=o6AP3nVNj_8&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=10 }
-{ [Super BEGINNER] 윤지는 학교에 가요 | 2024-12-02 | https://www.youtube.com/watch?v=o6AP3nVNj_8&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=10 }
-{ [Super BEGINNER] 윤지는 학교에 가요 | 2024-12-02 | https://www.youtube.com/watch?v=o6AP3nVNj_8&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=10 }
+{ [Super BEGINNER] Guess who I am <3 | 2024-12-02 | https://www.youtube.com/watch?v=reP0VLljWGU&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=8 }
+{ [Super BEGINNER] 저는 심심해요 | 2024-12-02 | https://www.youtube.com/watch?v=rxORffuEn-A&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=7 }
+{ [Super BEGINNER] 룸메이트 | 2024-12-02 | https://www.youtube.com/watch?v=ct57VMooh3s&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=1 }
+{ Korean Listening : slow koreans conversation for beginners | 2024-12-02 | https://www.youtube.com/watch?v=k6gpm0u9Mzg&list=PLsSSztkrGbTXq8AvWCz0DprVAZ2tycfhJ&index=5&t=67s }
+{ How did Rapunzel and Flynn Rider meet? | 2024-12-02 | https://www.youtube.com/watch?v=EZl-JpDd-hg&list=PLsSSztkrGbTXq8AvWCz0DprVAZ2tycfhJ&index=5 }
+{ [Super BEGINNER] 이거는 뭐예요? | 2024-12-02 | https://www.youtube.com/watch?v=rpsMPAOllzY&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=6 }
+{ [Super BEGINNER] 사진을 찍었어요 | 2024-12-02 | https://www.youtube.com/watch?v=pgM_VzPmh28&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=5 }
+{ [Super BEGINNER] 저는 오늘 바빠요 | 2024-12-03 | https://www.youtube.com/watch?v=3NsduAqJiYE&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=5 }
+{ [Super BEGINNER] 취미가 뭐예요? | 2024-12-03 | https://www.youtube.com/watch?v=CoBbEOYFdFY&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=3 }
+{ [Super BEGINNER] 문 뒤에 뭐가 있어요? | 2024-12-03 | https://www.youtube.com/watch?v=pE_XGFg0TfA&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=3 }
+{ [BEGINNER] 우리 가족 | 2024-12-04 | https://www.youtube.com/watch?v=tpnmeXH9VZ4&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2 }
+{ [BEGINNER] {2} 동네 공원 | 2024-12-05 | https://www.youtube.com/watch?v=gQ-4AVWYNJI&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2&t=48s }
+{ [BEGINNER] {3} 저녁 일상 | 2024-12-05 | https://www.youtube.com/watch?v=ZTwmL9hSbX0&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=4 }

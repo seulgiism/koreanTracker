@@ -272,7 +272,7 @@ void instruction_show(katarray_voidp_t *KatArray, short id) {
         watches_to_xformat(watches_x_str, data_ptr->watches);
 
         // print out the str
-        printf(RED " %2hd: %4s %s | %s\n" RESET, id, watches_x_str, data_ptr->name, data_ptr->link);
+        printf(PURPLE " %2hd: %4s %s | %s\n" RESET, id, watches_x_str, data_ptr->name, data_ptr->link);
 
         free(watches_x_str);
     }
