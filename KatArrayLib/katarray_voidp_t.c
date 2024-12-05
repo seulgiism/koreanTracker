@@ -558,7 +558,9 @@ void* katarray_voidp_remove_overwrite_at(katarray_voidp_t **KatArray, size_t ind
 
 // remove / resest the whole array
 void katarray_voidp_reset(katarray_voidp_t **KatArray, size_t length, size_t capacity) {
-    *KatArray = katarray_voidp_create(length, (*KatArray)->initial_value, capacity, (*KatArray)->shrinkable);
+    katarray_voidp_t *temp_ptr = katarray_voidp_create(length, (*KatArray)->initial_value, capacity, (*KatArray)->shrinkable);
+    katarray_voidp_free(*KatArray);
+    *KatArray = temp_ptr;
     return;
 }
 
