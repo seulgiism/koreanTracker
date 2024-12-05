@@ -55,9 +55,9 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /////// !!!! PLEASE CHANGE THESE TO YOUR PATH !!!! ////////
-#define PATH_TO_REPLIST "/home/katarina/repos/koreanTracker/koreanTracker/rep-list.dat"
-#define PATH_TO_WATCHEDLIST "/home/katarina/repos/koreanTracker/koreanTracker/watched-list.txt"
-#define PATH_TO_README "/home/katarina/repos/koreanTracker/README.md"
+#define PATH_TO_REPLIST "/path/to/koreanTracker/koreanTracker/rep-list.dat"
+#define PATH_TO_WATCHEDLIST "/path/to/koreanTracker/koreanTracker/watched-list.txt"
+#define PATH_TO_README "/path/to/repos/koreanTracker/README.md"
 
 FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* function_name);
 void katarray_deserialize_replist(katarray_voidp_t *KatArray);
