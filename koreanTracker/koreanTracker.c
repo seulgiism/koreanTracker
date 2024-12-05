@@ -52,6 +52,8 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 #define KOREANDATA_FORMAT_SCANF "[%hd, %199[^,], %499[^]]\n"   // watches, name, link
 #define WATCHLIST_FORMAT_PRINT "{ %s | %s | %s }\n" // name, date, link
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/////// !!!! PLEASE CHANGE THESE TO YOUR PATH !!!! ////////
 #define PATH_TO_REPLIST "/home/katarina/repos/koreanTracker/koreanTracker/rep-list.dat"
 #define PATH_TO_WATCHEDLIST "/home/katarina/repos/koreanTracker/koreanTracker/watched-list.txt"
 #define PATH_TO_README "/home/katarina/repos/koreanTracker/README.md"

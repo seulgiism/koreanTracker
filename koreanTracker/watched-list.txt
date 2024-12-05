@@ -9,6 +9,6 @@
 { [Super BEGINNER] 저는 오늘 바빠요 | 2024-12-03 | https://www.youtube.com/watch?v=3NsduAqJiYE&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=5 }
 { [Super BEGINNER] 취미가 뭐예요? | 2024-12-03 | https://www.youtube.com/watch?v=CoBbEOYFdFY&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=3 }
 { [Super BEGINNER] 문 뒤에 뭐가 있어요? | 2024-12-03 | https://www.youtube.com/watch?v=pE_XGFg0TfA&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=3 }
-{ [BEGINNER] 우리 가족 | 2024-12-04 | https://www.youtube.com/watch?v=tpnmeXH9VZ4&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2 }
+{ [BEGINNER] {1} 우리 가족 | 2024-12-04 | https://www.youtube.com/watch?v=tpnmeXH9VZ4&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2 }
 { [BEGINNER] {2} 동네 공원 | 2024-12-05 | https://www.youtube.com/watch?v=gQ-4AVWYNJI&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2&t=48s }
 { [BEGINNER] {3} 저녁 일상 | 2024-12-05 | https://www.youtube.com/watch?v=ZTwmL9hSbX0&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=4 }
