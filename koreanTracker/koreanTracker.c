@@ -45,6 +45,7 @@ void argv_set_flags_increment(char **argv, short argc, short* id);
 
 // katarray extentions
 void katarray_free(katarray_voidp_t *KatArray);
+void katarray_korean_data_free(katarray_voidp_t *KatArray);
 void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data);
 
 // file handling
@@ -54,9 +55,9 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /////// !!!! PLEASE CHANGE THESE TO YOUR PATH !!!! ////////
-#define PATH_TO_REPLIST "/path/to/koreanTracker/koreanTracker/rep-list.dat"
-#define PATH_TO_WATCHEDLIST "/path/to/katarina/repos/koreanTracker/koreanTracker/watched-list.txt"
-#define PATH_TO_README "/path/to/repos/koreanTracker/README.md"
+#define PATH_TO_REPLIST "/home/katarina/repos/koreanTracker/koreanTracker/rep-list.dat"
+#define PATH_TO_WATCHEDLIST "/home/katarina/repos/koreanTracker/koreanTracker/watched-list.txt"
+#define PATH_TO_README "/home/katarina/repos/koreanTracker/README.md"
 
 FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* function_name);
 void katarray_deserialize_replist(katarray_voidp_t *KatArray);
@@ -103,6 +104,7 @@ int main(int argc, char** argv) {
             instruction_add(KatArray_KoreanData, watched, name, link);
 
             // clear array for show instruction
+            katarray_korean_data_free(KatArray_KoreanData);
             katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
 
             // show update
@@ -120,6 +122,7 @@ int main(int argc, char** argv) {
             instruction_rm(KatArray_KoreanData, id);
 
             // clear array for show instruction
+            katarray_korean_data_free(KatArray_KoreanData);
             katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
 
             // show update
@@ -148,6 +151,7 @@ int main(int argc, char** argv) {
             instruction_increment(KatArray_KoreanData, id);
 
             // clear array for show instruction
+            katarray_korean_data_free(KatArray_KoreanData);
             katarray_voidp_reset(&KatArray_KoreanData, 0, 50);
 
             // show update
@@ -417,7 +421,24 @@ void argv_set_flags_increment(char **argv, short argc, short* id) {
     }
 }
 
+void katarray_korean_data_free(katarray_voidp_t *KatArray) {
+    // free pointers
+    for (short i = 0; i < (short)KatArray->length; i++) {
 
+        // get ptr
+        korean_data_t *korean_data_ptr = katarray_voidp_get_value_at(KatArray, i);
+
+        // quit if null
+        if (!korean_data_ptr) continue;
+
+        // free up
+        free(korean_data_ptr->name);
+        free(korean_data_ptr->link);
+        free(korean_data_ptr);
+    }
+
+    return;
+}
 
 void katarray_free(katarray_voidp_t *KatArray) {
     

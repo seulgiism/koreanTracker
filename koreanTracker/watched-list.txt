@@ -13,3 +13,8 @@
 { [BEGINNER] {2} 동네 공원 | 2024-12-05 | https://www.youtube.com/watch?v=gQ-4AVWYNJI&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2&t=48s }
 { [BEGINNER] {3} 저녁 일상 | 2024-12-05 | https://www.youtube.com/watch?v=ZTwmL9hSbX0&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=4 }
 { hhhhh | 2024-12-05 | fwoajfioawjfiwaf }
+{ hfwajifjwa | 2024-12-05 | no_string }
+{ noomer | 2024-12-05 | no_string }
+{ gajgifoawjio | 2024-12-05 | dwajiodfjwaiofjwa }
+{ noomer | 2024-12-05 | no_string }
+{ gajgifoawjio | 2024-12-05 | dwajiodfjwaiofjwa }
