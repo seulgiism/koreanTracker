@@ -19,3 +19,7 @@
 { noomer | 2024-12-05 | no_string }
 { gajgifoawjio | 2024-12-05 | dwajiodfjwaiofjwa }
 { hhhhh | 2024-12-05 | fwoajfioawjfiwaf }
+{ hhhhh | 2024-12-05 | fwoajfioawjfiwaf }
+{ [BEGINNER] {4} 수진 씨의 아침 | 2024-12-06 | https://www.youtube.com/watch?v=h8tsdDGwnEE&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=5 }
+{ [BEGINNER] {5} 12/7 Do you like Ramyeon? | 2024-12-07 | https://www.youtube.com/watch?v=Yn6p55gS-bs&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=6 }
+{ [BEGINNER] {6} 12/7 My Hobby | 2024-12-07 | https://www.youtube.com/watch?v=wOAJWZjy_Z8&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=7 }

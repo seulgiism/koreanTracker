@@ -555,6 +555,11 @@ void write_log_entry_watchedlist(korean_data_t *korean_data) {
 // sort katarray
 void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data) {
 
+    if (KatArray == NULL) {
+        perror("ERROR: katarray was not made, let's quit before shit goes down!");
+        exit(EXIT_FAILURE);
+    }
+
     if (KatArray->length == 0 || new_data->watches == 1) {
         katarray_voidp_set_append(&KatArray, new_data);
         return;
@@ -564,6 +569,9 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
         
         // get old_data for i
         korean_data_t *old_data = katarray_voidp_get_value_at(KatArray, i);
+        if (old_data == NULL) {
+            continue;
+        }
 
         if (old_data->watches == new_data->watches) {
             katarray_voidp_set_insert_at(&KatArray, i, new_data);
