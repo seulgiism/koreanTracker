@@ -1,5 +1,9 @@
+love you seulgitje <3
+
 !!!! please change the paths in koreanTracker.c to your paths,
 !!!! relative paths ensure that your path works when you put it in your binaries or link it in path variable
+
+for recompilation of the file, type "make re" into the terminal with the makefile present in the directory.
 
 ```
 NAME
@@ -46,7 +50,16 @@ DESCRIPTION
             -i --id     (NEEDED)
                 id of entry to be incremented
 
-        
+
+        koreantrack set
+            used to set specific settings
+            
+            -c --cap    (NEEDED)
+                maximum cap of an entry's watched
+                if it reaches the cap, the entry will be deleted
+                this happens with the add command and inc command automatically.
+
+
         koreantrack logs
             used to log all entries ever added, 
             it cats watched-list.txt in koreanTracker/

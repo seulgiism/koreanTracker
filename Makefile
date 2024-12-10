@@ -4,7 +4,7 @@ CFLAGS = -g -Werror -Wextra -Wall
 LIB_SRCS = ./KatArrayLib/katarray_voidp_t.c ./KatArrayLib/katarray_helper.c
 APP_SRCS = ./koreanTracker/koreanTracker.c
 
-OUT = koreantrack
+OUT = koreantrackforseulgi
 
 
 all: $(OUT)

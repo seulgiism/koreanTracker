@@ -15,6 +15,16 @@
 #define INDIGO "\033[38;5;54m"
 #define PURPLE "\033[35m"
 
+// seulgi colors
+#define SOFT_PINK "\033[38;2;255;182;193m"
+#define PERIWINKLE "\033[38;2;204;204;255m"
+#define ORCHID "\033[38;2;218;112;214m"
+#define MAGENTA "\033[38;2;255;0;255m"
+#define DEEP_PINK "\033[38;2;255;20;147m"
+#define PLUM "\033[38;2;221;160;221m"
+#define VIOLET "\033[38;2;238;130;238m"
+#define THISTLE "\033[38;2;216;191;216m"
+
 #define RESET "\033[0m"
 
 // structure for koreandata, the katarray will point to koreandata structs
@@ -41,6 +51,7 @@ void argv_set_flags_add(char **argv, short argc, char** name, char** link, short
 void argv_set_flags_rm(char **argv, short argc, short* id);
 void argv_set_flags_show(char **argv, short argc, short* id);
 void argv_set_flags_increment(char **argv, short argc, short* id);
+void argv_set_flags_settings(char **argv, short argc, short* cap);
 
 
 // katarray extentions
@@ -52,18 +63,21 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 #define KOREANDATA_FORMAT_PRINT "[%hd, %s, %s]\n" // watches, name, link
 #define KOREANDATA_FORMAT_SCANF "[%hd, %199[^,], %499[^]]\n"   // watches, name, link
 #define WATCHLIST_FORMAT_PRINT "{ %s | %s | %s }\n" // name, date, link
+#define SETTINGS_FORMAT "watches-after-deletion: %hd\n"
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /////// !!!! PLEASE CHANGE THESE TO YOUR PATH !!!! ////////
-#define PATH_TO_REPLIST "/path/to/koreanTracker/koreanTracker/rep-list.dat"
-#define PATH_TO_WATCHEDLIST "/path/to/koreanTracker/koreanTracker/watched-list.txt"
-#define PATH_TO_README "/path/to/repos/koreanTracker/README.md"
+#define PATH_TO_REPLIST "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/koreanTracker/rep-list.dat"
+#define PATH_TO_WATCHEDLIST "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/koreanTracker/watched-list.txt"
+#define PATH_TO_SETTINGS "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/koreanTracker/settings"
+#define PATH_TO_README "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/README.md"
 
 FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* function_name);
 void katarray_deserialize_replist(katarray_voidp_t *KatArray);
 void katarray_serialize_replist(katarray_voidp_t *KatArray);
 void write_log_entry_watchedlist(korean_data_t *korean_data);
-
+short read_settings();
+void write_settings(short watch_rm_cap);
 
 // time functions
 void time_str_set(char* time_str_buffer);
@@ -95,7 +109,7 @@ int main(int argc, char** argv) {
 
             // quit if no name is given
             if (name == NULL) {
-                perror("you forgot to put a name dummy\n\n");
+                perror("seulgi, je ben de naam vergeet :((( <3\n\n");
                 katarray_free(KatArray_KoreanData);
                 exit(EXIT_FAILURE);
             }
@@ -158,6 +172,24 @@ int main(int argc, char** argv) {
             instruction_show(KatArray_KoreanData, -1);
         }
 
+        // SETTINGS feature
+        else if (strcmp(argv[1], "set") == 0) {
+
+            // store flags
+            short cap = -1;
+            argv_set_flags_settings(argv, argc, &cap);
+            
+            // quit if no number is given
+            if (cap < 0) {
+                perror("seulgitje, je moet de cap wel zetten he\n\n");
+                katarray_free(KatArray_KoreanData);
+                exit(EXIT_FAILURE);
+            }
+            
+            // write new cap to file
+            write_settings(cap);
+        }
+
         else if (strcmp(argv[1], "logs") == 0) {
 
             char *cat_args[] = {"cat", PATH_TO_WATCHEDLIST, NULL};
@@ -185,7 +217,7 @@ int main(int argc, char** argv) {
 
     // error occured
 
-    printf("ERROR");
+    printf("ERROR\nseulgi, ik denk dat je command ben vergeet :<\nfor help: koreantrack -h");
 
     return 1;
 }
@@ -210,8 +242,12 @@ void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char
     korean_data_ptr->name    = strdup(name);
     korean_data_ptr->link    = strdup(link);
 
-    // put the data sorted with watches in katarray
-    katarray_insert_sorted(KatArray, korean_data_ptr);
+    // check if deletion is need if it has reached the cap setting
+    if (korean_data_ptr->watches < read_settings()) {
+        
+        // put the data sorted with watches in katarray
+        katarray_insert_sorted(KatArray, korean_data_ptr);
+    }
 
     // write to watched-list.txt
     write_log_entry_watchedlist(korean_data_ptr);
@@ -260,7 +296,7 @@ void instruction_show(katarray_voidp_t *KatArray, short id) {
     // deserialize rep-list.dat to katarray
     katarray_deserialize_replist(KatArray);
 
-    printf("<3---------------------------------<3\n\n");
+    printf(THISTLE"<3---------------------------------<3\n\n"RESET);
     // id was given, print out the id with the link
     if (id >= 0) {
 
@@ -278,7 +314,7 @@ void instruction_show(katarray_voidp_t *KatArray, short id) {
         watches_to_xformat(watches_x_str, data_ptr->watches);
 
         // print out the str
-        printf(PURPLE " %2hd: %4s %s | %s\n" RESET, id, watches_x_str, data_ptr->name, data_ptr->link);
+        printf(DEEP_PINK " %2hd: %4s %s | %s\n" RESET, id, watches_x_str, data_ptr->name, data_ptr->link);
 
         free(watches_x_str);
     }
@@ -297,32 +333,32 @@ void instruction_show(katarray_voidp_t *KatArray, short id) {
 
             switch (data_ptr->watches) {
                 case 1:
-                    printf(BLUE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(SOFT_PINK" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 2:
-                    printf(GREEN" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(PERIWINKLE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 3:
-                    printf(YELLOW" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(ORCHID" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 4:
-                    printf(ORANGE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(MAGENTA" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 5:
-                    printf(RED" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(DEEP_PINK" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 6:
-                    printf(INDIGO" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(PLUM" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 default:
-                    printf(PURPLE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(VIOLET" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
             }
 
             free(watches_x_str);    
         }
     } 
-        printf("\n<3---------------------------------<3\n\n");
+        printf(THISTLE"\n<3---------------------------------<3\n\n"RESET);
     
     return;
 }
@@ -355,9 +391,11 @@ void instruction_increment(katarray_voidp_t *KatArray, short id) {
     // deserialize rep-list.dat to katarray
     katarray_deserialize_replist(KatArray);
 
+    // read from settings
+
     // check if id is valid
     if (id < 0 || id >= (short)KatArray->length) {
-        perror("you forgot to give me the id smh..\nor you're trying to pull some tricks with those out of bounders!\n\n");
+        perror("seulgi je ben de id vergeet ^ ^ love you..\nof de id is out of bound... \n\n");
         katarray_free(KatArray);
         exit(EXIT_FAILURE);
     }
@@ -369,8 +407,12 @@ void instruction_increment(katarray_voidp_t *KatArray, short id) {
     // set the katarray's dataptr to NULL
     katarray_voidp_remove_overwrite_at(&KatArray, id);
 
-    // put the data's new watches in the correct place
-    katarray_insert_sorted(KatArray, data_ptr);
+    // check if deletion is need if it has reached the cap setting
+    if (data_ptr->watches < read_settings()) {
+        
+        // put the data's new watches in the correct place
+        katarray_insert_sorted(KatArray, data_ptr);
+    }
 
     // serialize object
     katarray_serialize_replist(KatArray);
@@ -421,6 +463,18 @@ void argv_set_flags_increment(char **argv, short argc, short* id) {
     }
 }
 
+// will store the positions of add flags into the vars
+// 0 means it was not found
+void argv_set_flags_settings(char **argv, short argc, short* cap) {
+    for (short i = 2; i < argc; i++) {
+
+        // set flags
+        if (((strcmp(argv[i], "--cap") == 0) || (strcmp(argv[i], "-c") == 0)) && (i + 1) < argc) *cap = (short)(atoi(argv[i+1]));
+    }
+}
+
+
+/// freeing
 void katarray_korean_data_free(katarray_voidp_t *KatArray) {
     // free pointers
     for (short i = 0; i < (short)KatArray->length; i++) {
@@ -506,6 +560,33 @@ void katarray_deserialize_replist(katarray_voidp_t *KatArray) {
         // save to katarray
         katarray_voidp_push(&KatArray, korean_data_ptr);
     }
+
+    fclose(file);
+
+    return;
+}
+
+// read the settings
+short read_settings() {
+    
+    // open settings
+    FILE* file = fopen_wrapper(PATH_TO_SETTINGS, "r", __func__);
+    
+    short watch_rm_cap = 0;
+    fscanf(file, SETTINGS_FORMAT, &watch_rm_cap);
+
+    fclose(file);
+
+    return watch_rm_cap;
+}
+
+// write the settings
+void write_settings(short watch_rm_cap) {
+    
+    // open settings
+    FILE* file = fopen_wrapper(PATH_TO_SETTINGS, "w", __func__);
+
+    fprintf(file, SETTINGS_FORMAT, watch_rm_cap);
 
     fclose(file);
 

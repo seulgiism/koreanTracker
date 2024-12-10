@@ -1,25 +1,28 @@
-{ [Super BEGINNER] 윤지는 학교에 가요 | 2024-12-02 | https://www.youtube.com/watch?v=o6AP3nVNj_8&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=10 }
-{ [Super BEGINNER] Guess who I am <3 | 2024-12-02 | https://www.youtube.com/watch?v=reP0VLljWGU&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=8 }
-{ [Super BEGINNER] 저는 심심해요 | 2024-12-02 | https://www.youtube.com/watch?v=rxORffuEn-A&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=7 }
-{ [Super BEGINNER] 룸메이트 | 2024-12-02 | https://www.youtube.com/watch?v=ct57VMooh3s&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=1 }
-{ Korean Listening : slow koreans conversation for beginners | 2024-12-02 | https://www.youtube.com/watch?v=k6gpm0u9Mzg&list=PLsSSztkrGbTXq8AvWCz0DprVAZ2tycfhJ&index=5&t=67s }
-{ How did Rapunzel and Flynn Rider meet? | 2024-12-02 | https://www.youtube.com/watch?v=EZl-JpDd-hg&list=PLsSSztkrGbTXq8AvWCz0DprVAZ2tycfhJ&index=5 }
-{ [Super BEGINNER] 이거는 뭐예요? | 2024-12-02 | https://www.youtube.com/watch?v=rpsMPAOllzY&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=6 }
-{ [Super BEGINNER] 사진을 찍었어요 | 2024-12-02 | https://www.youtube.com/watch?v=pgM_VzPmh28&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=5 }
-{ [Super BEGINNER] 저는 오늘 바빠요 | 2024-12-03 | https://www.youtube.com/watch?v=3NsduAqJiYE&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=5 }
-{ [Super BEGINNER] 취미가 뭐예요? | 2024-12-03 | https://www.youtube.com/watch?v=CoBbEOYFdFY&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=3 }
-{ [Super BEGINNER] 문 뒤에 뭐가 있어요? | 2024-12-03 | https://www.youtube.com/watch?v=pE_XGFg0TfA&list=PLr7BTDhDckaK8V4wBf-EWRtZY94dlAnwp&index=3 }
-{ [BEGINNER] {1} 우리 가족 | 2024-12-04 | https://www.youtube.com/watch?v=tpnmeXH9VZ4&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2 }
-{ [BEGINNER] {2} 동네 공원 | 2024-12-05 | https://www.youtube.com/watch?v=gQ-4AVWYNJI&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=2&t=48s }
-{ [BEGINNER] {3} 저녁 일상 | 2024-12-05 | https://www.youtube.com/watch?v=ZTwmL9hSbX0&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=4 }
-{ hhhhh | 2024-12-05 | fwoajfioawjfiwaf }
-{ hfwajifjwa | 2024-12-05 | no_string }
-{ noomer | 2024-12-05 | no_string }
-{ gajgifoawjio | 2024-12-05 | dwajiodfjwaiofjwa }
-{ noomer | 2024-12-05 | no_string }
-{ gajgifoawjio | 2024-12-05 | dwajiodfjwaiofjwa }
-{ hhhhh | 2024-12-05 | fwoajfioawjfiwaf }
-{ hhhhh | 2024-12-05 | fwoajfioawjfiwaf }
-{ [BEGINNER] {4} 수진 씨의 아침 | 2024-12-06 | https://www.youtube.com/watch?v=h8tsdDGwnEE&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=5 }
-{ [BEGINNER] {5} 12/7 Do you like Ramyeon? | 2024-12-07 | https://www.youtube.com/watch?v=Yn6p55gS-bs&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=6 }
-{ [BEGINNER] {6} 12/7 My Hobby | 2024-12-07 | https://www.youtube.com/watch?v=wOAJWZjy_Z8&list=PLr7BTDhDckaLgIQh4yEjdrSAxNmRuADeX&index=7 }
+{ noomer | 2024-12-10 | no_string }
+{ noomer | 2024-12-10 | no_string }
+{ noomer | 2024-12-10 | no_string }
+{ noomer | 2024-12-10 | no_string }
+{ noomer2 | 2024-12-10 | no_string }
+{ noomer | 2024-12-10 | no_string }
+{ noomer2 | 2024-12-10 | no_string }
+{ noomer3 | 2024-12-10 | no_string }
+{ noomer0 | 2024-12-10 | no_string }
+{ noomer1 | 2024-12-10 | no_string }
+{ noomer2 | 2024-12-10 | no_string }
+{ noomer3 | 2024-12-10 | no_string }
+{ noomer4 | 2024-12-10 | no_string }
+{ noomer5 | 2024-12-10 | no_string }
+{ noomer6 | 2024-12-10 | no_string }
+{ noomer7 | 2024-12-10 | no_string }
+{ noomer8 | 2024-12-10 | no_string }
+{ noomer9 | 2024-12-10 | no_string }
+{ noomer0 | 2024-12-10 | no_string }
+{ noomer1 | 2024-12-10 | no_string }
+{ noomer2 | 2024-12-10 | no_string }
+{ noomer3 | 2024-12-10 | no_string }
+{ noomer4 | 2024-12-10 | no_string }
+{ noomer5 | 2024-12-10 | no_string }
+{ noomer6 | 2024-12-10 | no_string }
+{ noomer7 | 2024-12-10 | no_string }
+{ noomer8 | 2024-12-10 | no_string }
+{ noomer9 | 2024-12-10 | no_string }
