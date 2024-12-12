@@ -16,14 +16,15 @@
 #define PURPLE "\033[35m"
 
 // seulgi colors
-#define SOFT_PINK "\033[38;2;255;182;193m"
-#define PERIWINKLE "\033[38;2;204;204;255m"
-#define ORCHID "\033[38;2;218;112;214m"
-#define MAGENTA "\033[38;2;255;0;255m"
-#define DEEP_PINK "\033[38;2;255;20;147m"
-#define PLUM "\033[38;2;221;160;221m"
-#define VIOLET "\033[38;2;238;130;238m"
-#define THISTLE "\033[38;2;216;191;216m"
+#define SOFT_PINK "\033[38;2;255;120;140m"
+#define PERLIWINKLE "\033[38;2;220;100;180m"
+#define ORCHID "\033[38;2;230;80;220m"
+#define MAGENTA "\033[38;2;255;0;230m"
+#define DEEP_PINK "\033[38;2;255;40;140m"
+#define PLUM "\033[38;2;220;100;220m"
+#define VIOLET "\033[38;2;255;100;255m"
+#define THISTLE "\033[38;2;220;180;240m"
+
 
 #define RESET "\033[0m"
 
@@ -67,10 +68,10 @@ void katarray_insert_sorted(katarray_voidp_t *KatArray, korean_data_t *new_data)
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /////// !!!! PLEASE CHANGE THESE TO YOUR PATH !!!! ////////
-#define PATH_TO_REPLIST "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/koreanTracker/rep-list.dat"
-#define PATH_TO_WATCHEDLIST "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/koreanTracker/watched-list.txt"
-#define PATH_TO_SETTINGS "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/koreanTracker/settings"
-#define PATH_TO_README "/home/katarina/repos/koreanTrackerSeulgi/koreanTracker/README.md"
+#define PATH_TO_REPLIST "./koreanTracker/rep-list.dat"
+#define PATH_TO_WATCHEDLIST "./koreanTracker/watched-list.txt"
+#define PATH_TO_SETTINGS "./koreanTracker/settings"
+#define PATH_TO_README "./README.md"
 
 FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* function_name);
 void katarray_deserialize_replist(katarray_voidp_t *KatArray);
@@ -336,16 +337,16 @@ void instruction_show(katarray_voidp_t *KatArray, short id) {
                     printf(SOFT_PINK" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 2:
-                    printf(PERIWINKLE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(PERLIWINKLE" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 3:
-                    printf(ORCHID" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(DEEP_PINK" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 4:
                     printf(MAGENTA" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 5:
-                    printf(DEEP_PINK" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
+                    printf(ORCHID" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
                     break;
                 case 6:
                     printf(PLUM" %2hd: %4s %s\n"RESET, i, watches_x_str, data_ptr->name);
