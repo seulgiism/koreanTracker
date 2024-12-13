@@ -4,7 +4,6 @@
 some handy alliases
 ```
     alias kshow="koreantrack show -i"                     
-    alias kshowall="koreantrack show"
     alias kinc="koreantrack inc -i"
     alias krm="koreantrack rm -i" 
     alias kadd="koreantrack add -n" 
