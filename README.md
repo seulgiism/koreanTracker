@@ -3,10 +3,10 @@
 
 some handy alliases
 ```
-    alias kshow="koreantrack show -i"                     
-    alias kinc="koreantrack inc -i"
-    alias krm="koreantrack rm -i" 
-    alias kadd="koreantrack add -n" 
+    alias kshow="koreantrack show -i"    // shows      id ,    if (!id given) -> shows all entries     
+    alias kinc="koreantrack inc -i"      // increments id
+    alias krm="koreantrack rm -i"        // remove     id
+    alias kadd="koreantrack add -n"      // add        name,  -w and -l are still needed for both watches and link and should come after the name when using this alias
 ```
 
 INFO PAGE:
