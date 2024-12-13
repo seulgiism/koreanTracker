@@ -1,6 +1,16 @@
 !!!! please change the paths in koreanTracker.c to your paths,
 !!!! relative paths ensure that your path works when you put it in your binaries or link it in path variable
 
+some handy alliases
+```
+    alias kshow="koreantrack show -i"                     
+    alias kshowall="koreantrack show"
+    alias kinc="koreantrack inc -i"
+    alias krm="koreantrack rm -i" 
+    alias kadd="koreantrack add -n" 
+```
+
+INFO PAGE:
 ```
 NAME
         koreantrack - logs and tracks watches of videos
