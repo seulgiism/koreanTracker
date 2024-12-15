@@ -242,8 +242,6 @@ int main(int argc, char** argv) {
 // add instruction
 void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char* link) {
     
-    // deserialize rep-list.dat to katarray
-    katarray_deserialize_replist(KatArray);
 
     // if link not given, default it
     if (!link) {
@@ -309,7 +307,7 @@ void instruction_rm(katarray_voidp_t *KatArray, short id) {
 
     // quit if no id is given
     if (id < 0 || id >= (short)KatArray->length) {
-        perror("you forgot to give me the id smh..\nor you're trying to pull some tricks with those out of bounders!\n\n");
+        printf(RED"You forgot to provide a valid ID or the ID is out of bounds.\n"RESET);
         katarray_free(KatArray);
         exit(EXIT_FAILURE);
     }
@@ -327,8 +325,7 @@ void instruction_rm(katarray_voidp_t *KatArray, short id) {
     katarray_voidp_remove_overwrite_at(&KatArray, id);
 
 
-    // serialize object
-    katarray_serialize_replist(KatArray);
+    // Do not serialize here
 
     return;
 }
@@ -501,7 +498,52 @@ void interactive_rm(katarray_voidp_t *KatArray) {
     // Remove newline character if present
     input_line[strcspn(input_line, "\n")] = '\0';
 
-    // Parse and process each ID
+    // Parse and collect IDs
+    #define MAX_IDS 256  // Adjust as needed
+    int id_list[MAX_IDS];
+    int id_count = 0;
+
+    char *token = strtok(input_line, ",");
+    while (token != NULL && id_count < MAX_IDS) {
+        // Trim leading spaces
+        while (*token == ' ') token++;
+
+        // Trim trailing spaces
+        char *end = token + strlen(token) - 1;
+        while (end > token && *end == ' ') {
+            *end = '\0';
+            end--;
+        }
+
+        // Convert token to integer ID
+        int id = atoi(token);
+        if (id < 0 || id >= (int)KatArray->length) {
+            printf(RED"Invalid ID (%d). Skipping.\n"RESET, id);
+        } else {
+            id_list[id_count++] = id;
+        }
+
+        // Get next token
+        token = strtok(NULL, ",");
+    }
+
+    // Sort the IDs in descending order to handle shifting indices
+    for (int i = 0; i < id_count - 1; i++) {
+        for (int j = i + 1; j < id_count; j++) {
+            if (id_list[i] < id_list[j]) {
+                int temp = id_list[i];
+                id_list[i] = id_list[j];
+                id_list[j] = temp;
+            }
+        }
+    }
+
+    // Remove entries starting from the highest index
+    for (int i = 0; i < id_count; i++) {
+        int id = id_list[i];
+        // Perform REMOVE instruction
+        instruction_rm(KatArray, (short)id);
+    }
     char *token = strtok(input_line, ",");
     while (token != NULL) {
         // Trim leading spaces
@@ -533,7 +575,8 @@ void interactive_rm(katarray_voidp_t *KatArray) {
     katarray_serialize_replist(KatArray);
 
     // Reload KatArray to reflect updated data
-    katarray_korean_data_free(KatArray);
+    katarray_korean_data_free(KatArray);  // Free existing data
+    katarray_voidp_reset(&KatArray, 0, 50);
     katarray_deserialize_replist(KatArray);
 
     // Show updated entries
