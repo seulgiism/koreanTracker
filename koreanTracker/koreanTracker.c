@@ -302,17 +302,15 @@ void interactive_add(katarray_voidp_t *KatArray) {
 // rm instruction
 void instruction_rm(katarray_voidp_t *KatArray, short id) {
     
-    // deserialize rep-list.dat to katarray
-    katarray_deserialize_replist(KatArray);
+    // DO NOT deserialize KatArray here
 
-    // quit if no id is given
+    // Check if id is valid
     if (id < 0 || id >= (short)KatArray->length) {
-        printf(RED"You forgot to provide a valid ID or the ID is out of bounds.\n"RESET);
-        katarray_free(KatArray);
-        exit(EXIT_FAILURE);
+        printf(RED"Invalid ID (%d). Skipping.\n"RESET, id);
+        return;  // Do not exit the program
     }
 
-    // free pointer
+    // Free pointer
     korean_data_t *rm_data = katarray_voidp_get_value_at(KatArray, id);
     if (rm_data) {
         free(rm_data->name);
