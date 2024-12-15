@@ -93,7 +93,11 @@ int main(int argc, char** argv) {
     //argv[2] = strdup("-i");
     //argv[3] = strdup("1");
 
-    // entrance to add, remove, show, increment, help
+    // entrance to add, remove, show, increment, help, or interactive mode
+    if (argc == 1) {
+        interactive_menu();
+        return 0;
+    }
     if (argc > 1) {
 
         // initialize static katarray
@@ -259,6 +263,37 @@ void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char
     return;
 }
 
+void interactive_add(katarray_voidp_t *KatArray) {
+    char name[200] = {0};
+    char link[500] = {0};
+    int watches = 1;
+
+    printf("Enter name: ");
+    fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = '\0'; // Remove newline character
+
+    printf("Enter link (or press Enter to skip): ");
+    fgets(link, sizeof(link), stdin);
+    link[strcspn(link, "\n")] = '\0';
+
+    if (strlen(link) == 0) {
+        strcpy(link, "no_string");
+    }
+
+    printf("Enter number of watches: ");
+    if (scanf("%d", &watches) != 1) {
+        printf(YELLOW"Invalid input. Setting watches to 1.\n"RESET);
+        watches = 1;
+    }
+    while (getchar() != '\n'); // Clear input buffer
+
+    // Perform ADD instruction
+    instruction_add(KatArray, (short)watches, name, link);
+
+    // Show updated entries
+    instruction_show(KatArray, -1);
+}
+
 // rm instruction
 void instruction_rm(katarray_voidp_t *KatArray, short id) {
     
@@ -364,6 +399,61 @@ void instruction_show(katarray_voidp_t *KatArray, short id) {
     return;
 }
 
+void interactive_menu() {
+    int choice = 0;
+    katarray_voidp_t *KatArray_KoreanData = katarray_voidp_create(0, NULL, 50, 0);
+
+    while (choice != 7) {
+        printf(THISTLE"\n--- Korean Tracker Menu ---\n"RESET);
+        printf(SOFT_PINK"1. Add Entry\n"RESET);
+        printf(PERLIWINKLE"2. Remove Entry\n"RESET);
+        printf(DEEP_PINK"3. Show Entries\n"RESET);
+        printf(MAGENTA"4. Increment Watches\n"RESET);
+        printf(ORCHID"5. View Logs\n"RESET);
+        printf(PLUM"6. Settings\n"RESET);
+        printf(VIOLET"7. Exit\n"RESET);
+        printf("Enter your choice: ");
+
+        if (scanf("%d", &choice) != 1) {
+            // Handle invalid input
+            while (getchar() != '\n');
+            printf(RED"Invalid input. Please enter a number.\n"RESET);
+            choice = 0; // Reset choice
+            continue;
+        }
+        // Clear input buffer
+        while (getchar() != '\n');
+
+        switch (choice) {
+            case 1:
+                interactive_add(KatArray_KoreanData);
+                break;
+            case 2:
+                interactive_rm(KatArray_KoreanData);
+                break;
+            case 3:
+                interactive_show(KatArray_KoreanData);
+                break;
+            case 4:
+                interactive_increment(KatArray_KoreanData);
+                break;
+            case 5:
+                view_logs();
+                break;
+            case 6:
+                interactive_settings();
+                break;
+            case 7:
+                katarray_free(KatArray_KoreanData);
+                printf(GREEN"Goodbye!\n"RESET);
+                return;
+            default:
+                printf(RED"Invalid choice. Please try again.\n"RESET);
+                break;
+        }
+    }
+}
+
 // watches converter to X
 void watches_to_xformat(char *watches_str, short watches) {
     
@@ -384,6 +474,31 @@ void watches_to_xformat(char *watches_str, short watches) {
 
         return;
     }
+}
+
+void interactive_rm(katarray_voidp_t *KatArray) {
+    // Placeholder for interactive remove function
+    printf("Interactive remove not yet implemented.\n");
+}
+
+void interactive_show(katarray_voidp_t *KatArray) {
+    // Placeholder for interactive show function
+    printf("Interactive show not yet implemented.\n");
+}
+
+void interactive_increment(katarray_voidp_t *KatArray) {
+    // Placeholder for interactive increment function
+    printf("Interactive increment not yet implemented.\n");
+}
+
+void interactive_settings() {
+    // Placeholder for interactive settings function
+    printf("Interactive settings not yet implemented.\n");
+}
+
+void view_logs() {
+    // Placeholder for view logs function
+    printf("View logs not yet implemented.\n");
 }
 
 // increment instruction
