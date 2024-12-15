@@ -266,8 +266,6 @@ void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char
     // write to watched-list.txt
     write_log_entry_watchedlist(korean_data_ptr);
 
-    // serialize object
-    katarray_serialize_replist(KatArray);
 
     return;
 }
@@ -486,44 +484,74 @@ void watches_to_xformat(char *watches_str, short watches) {
 }
 
 void interactive_rm(katarray_voidp_t *KatArray) {
-    // Placeholder for interactive remove function
-    int id;
-
     // Deserialize the existing data
     katarray_deserialize_replist(KatArray);
 
     // Display current entries
     instruction_show(KatArray, -1);
 
-    // Prompt user for the ID to remove
-    printf("Enter the ID of the entry to remove: ");
-    if (scanf("%d", &id) != 1 || id < 0 || id >= (int)KatArray->length) {
-        printf(RED"Invalid ID. Operation cancelled.\n"RESET);
-        while (getchar() != '\n'); // Clear input buffer
+    // Prompt user for the IDs to remove
+    printf("Enter the IDs of the entries to remove (separated by commas): ");
+    char input_line[256];
+    if (fgets(input_line, sizeof(input_line), stdin) == NULL) {
+        printf(RED"Error reading input. Operation cancelled.\n"RESET);
         return;
     }
-    while (getchar() != '\n'); // Clear input buffer
 
-    // Perform REMOVE instruction
-    instruction_rm(KatArray, (short)id);
+    // Remove newline character if present
+    input_line[strcspn(input_line, "\n")] = '\0';
+
+    // Parse and process each ID
+    char *token = strtok(input_line, ",");
+    while (token != NULL) {
+        // Trim leading spaces
+        while (*token == ' ') {
+            token++;
+        }
+
+        // Trim trailing spaces
+        char *end = token + strlen(token) - 1;
+        while (end > token && *end == ' ') {
+            *end = '\0';
+            end--;
+        }
+
+        // Convert token to integer ID
+        int id = atoi(token);
+        if (id < 0 || id >= (int)KatArray->length) {
+            printf(RED"Invalid ID (%d). Skipping.\n"RESET, id);
+        } else {
+            // Perform REMOVE instruction
+            instruction_rm(KatArray, (short)id);
+        }
+
+        // Get next token
+        token = strtok(NULL, ",");
+    }
+
+    // After deleting all entries, serialize once
+    katarray_serialize_replist(KatArray);
+
+    // Reload KatArray to reflect updated data
+    katarray_korean_data_free(KatArray);
+    katarray_deserialize_replist(KatArray);
 
     // Show updated entries
     instruction_show(KatArray, -1);
 }
 
 void interactive_show(katarray_voidp_t *KatArray) {
-    // Placeholder for interactive show function
-    char choice[10];
-
     // Deserialize the existing data
     katarray_deserialize_replist(KatArray);
 
-    // Ask if the user wants to see all entries or a specific one
-    printf("Do you want to see all entries or a specific one? (all/id): ");
+    char choice[10];
+
+    // Modify prompt message
+    printf("Do you want to see all entries or a specific one? (Press Enter for all): ");
     fgets(choice, sizeof(choice), stdin);
     choice[strcspn(choice, "\n")] = '\0'; // Remove newline character
 
-    if (strcmp(choice, "all") == 0) {
+    if (strlen(choice) == 0 || strcmp(choice, "all") == 0) {
         // Show all entries
         instruction_show(KatArray, -1);
     } else {
