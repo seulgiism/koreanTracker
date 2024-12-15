@@ -801,7 +801,11 @@ FILE* fopen_wrapper(char* file_name, char* file_instruction, const char* functio
 // deserialization into katarray
 void katarray_deserialize_replist(katarray_voidp_t *KatArray) {
     
-    // open rep-list.dat
+    // Free existing data and reset length
+    katarray_korean_data_free(KatArray);
+    KatArray->length = 0;
+
+    // Open rep-list.dat
     FILE* file = fopen_wrapper(PATH_TO_REPLIST, "r", __func__);
 
     // stop when end of file
