@@ -42,6 +42,15 @@ void instruction_rm(katarray_voidp_t *KatArray, short id);
 void instruction_show(katarray_voidp_t *KatArray, short id);
 void instruction_increment(katarray_voidp_t *KatArray, short id);
 
+// Prototypes for interactive functions
+void interactive_menu();
+void interactive_add(katarray_voidp_t *KatArray);
+void interactive_rm(katarray_voidp_t *KatArray);
+void interactive_show(katarray_voidp_t *KatArray);
+void interactive_increment(katarray_voidp_t *KatArray);
+void interactive_settings();
+void view_logs();
+
 
 // helper for show
 void watches_to_xformat(char *watches_str, short watches);
