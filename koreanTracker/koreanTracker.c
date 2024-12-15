@@ -544,32 +544,6 @@ void interactive_rm(katarray_voidp_t *KatArray) {
         // Perform REMOVE instruction
         instruction_rm(KatArray, (short)id);
     }
-    char *token = strtok(input_line, ",");
-    while (token != NULL) {
-        // Trim leading spaces
-        while (*token == ' ') {
-            token++;
-        }
-
-        // Trim trailing spaces
-        char *end = token + strlen(token) - 1;
-        while (end > token && *end == ' ') {
-            *end = '\0';
-            end--;
-        }
-
-        // Convert token to integer ID
-        int id = atoi(token);
-        if (id < 0 || id >= (int)KatArray->length) {
-            printf(RED"Invalid ID (%d). Skipping.\n"RESET, id);
-        } else {
-            // Perform REMOVE instruction
-            instruction_rm(KatArray, (short)id);
-        }
-
-        // Get next token
-        token = strtok(NULL, ",");
-    }
 
     // After deleting all entries, serialize once
     katarray_serialize_replist(KatArray);
