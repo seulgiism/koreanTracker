@@ -241,7 +241,8 @@ int main(int argc, char** argv) {
 
 // add instruction
 void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char* link) {
-    
+    // Deserialize rep-list.dat into KatArray
+    katarray_deserialize_replist(KatArray);
 
     // if link not given, default it
     if (!link) {
@@ -264,6 +265,9 @@ void instruction_add(katarray_voidp_t *KatArray, short watched, char* name, char
     // write to watched-list.txt
     write_log_entry_watchedlist(korean_data_ptr);
 
+
+    // Serialize the updated KatArray
+    katarray_serialize_replist(KatArray);
 
     return;
 }
