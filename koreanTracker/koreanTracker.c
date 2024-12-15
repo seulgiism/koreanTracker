@@ -478,27 +478,123 @@ void watches_to_xformat(char *watches_str, short watches) {
 
 void interactive_rm(katarray_voidp_t *KatArray) {
     // Placeholder for interactive remove function
-    printf("Interactive remove not yet implemented.\n");
+    int id;
+
+    // Deserialize the existing data
+    katarray_deserialize_replist(KatArray);
+
+    // Display current entries
+    instruction_show(KatArray, -1);
+
+    // Prompt user for the ID to remove
+    printf("Enter the ID of the entry to remove: ");
+    if (scanf("%d", &id) != 1 || id < 0 || id >= (int)KatArray->length) {
+        printf(RED"Invalid ID. Operation cancelled.\n"RESET);
+        while (getchar() != '\n'); // Clear input buffer
+        return;
+    }
+    while (getchar() != '\n'); // Clear input buffer
+
+    // Perform REMOVE instruction
+    instruction_rm(KatArray, (short)id);
+
+    // Show updated entries
+    instruction_show(KatArray, -1);
 }
 
 void interactive_show(katarray_voidp_t *KatArray) {
     // Placeholder for interactive show function
-    printf("Interactive show not yet implemented.\n");
+    char choice[10];
+
+    // Deserialize the existing data
+    katarray_deserialize_replist(KatArray);
+
+    // Ask if the user wants to see all entries or a specific one
+    printf("Do you want to see all entries or a specific one? (all/id): ");
+    fgets(choice, sizeof(choice), stdin);
+    choice[strcspn(choice, "\n")] = '\0'; // Remove newline character
+
+    if (strcmp(choice, "all") == 0) {
+        // Show all entries
+        instruction_show(KatArray, -1);
+    } else {
+        int id = atoi(choice);
+        if (id < 0 || id >= (int)KatArray->length) {
+            printf(RED"Invalid ID.\n"RESET);
+            return;
+        }
+        // Show specific entry
+        instruction_show(KatArray, (short)id);
+    }
 }
 
 void interactive_increment(katarray_voidp_t *KatArray) {
     // Placeholder for interactive increment function
-    printf("Interactive increment not yet implemented.\n");
+    int id;
+
+    // Deserialize the existing data
+    katarray_deserialize_replist(KatArray);
+
+    // Display current entries
+    instruction_show(KatArray, -1);
+
+    // Prompt user for the ID to increment
+    printf("Enter the ID of the entry to increment watches: ");
+    if (scanf("%d", &id) != 1 || id < 0 || id >= (int)KatArray->length) {
+        printf(RED"Invalid ID. Operation cancelled.\n"RESET);
+        while (getchar() != '\n'); // Clear input buffer
+        return;
+    }
+    while (getchar() != '\n'); // Clear input buffer
+
+    // Perform INCREMENT instruction
+    instruction_increment(KatArray, (short)id);
+
+    // Show updated entries
+    instruction_show(KatArray, -1);
 }
 
 void interactive_settings() {
     // Placeholder for interactive settings function
-    printf("Interactive settings not yet implemented.\n");
+    int cap;
+
+    // Read current settings
+    short current_cap = read_settings();
+    printf("Current watches-after-deletion cap: %hd\n", current_cap);
+
+    // Prompt user for the new cap value
+    printf("Enter new cap value: ");
+    if (scanf("%d", &cap) != 1 || cap < 0) {
+        printf(RED"Invalid cap value. Operation cancelled.\n"RESET);
+        while (getchar() != '\n'); // Clear input buffer
+        return;
+    }
+    while (getchar() != '\n'); // Clear input buffer
+
+    // Update settings
+    write_settings((short)cap);
+
+    printf(GREEN"Settings updated successfully.\n"RESET);
 }
 
 void view_logs() {
     // Placeholder for view logs function
-    printf("View logs not yet implemented.\n");
+    // Open the watched-list.txt file
+    FILE* file = fopen(PATH_TO_WATCHEDLIST, "r");
+    if (!file) {
+        printf(RED"Could not open watched list file.\n"RESET);
+        return;
+    }
+
+    // Read and display the contents
+    char line[1024];
+    printf(THISTLE"\n--- Watch Logs ---\n"RESET);
+    while (fgets(line, sizeof(line), file)) {
+        printf("%s", line);
+    }
+    printf(THISTLE"------------------\n"RESET);
+
+    fclose(file);
 }
 
 // increment instruction
