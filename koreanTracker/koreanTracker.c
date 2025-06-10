@@ -170,12 +170,14 @@ int main(int argc, char** argv) {
         else {
 
             // HELP feature
-            if (strcmp(argv[1], "-h") || strcmp(argv[1], "--help")) {
+            if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
                 char *cat_args[] = {"cat", PATH_TO_README, NULL};
-                execvp("less", cat_args);
+                execvp("cat", cat_args);
 
                 // if execvp fails
                 perror("execvp failed");
+            } else {
+                fprintf(stderr, "Unknown command: %s\n", argv[1]);
             }
         }
 
@@ -331,12 +333,9 @@ void instruction_show(katarray_voidp_t *KatArray, short id) {
 void watches_to_xformat(char *watches_str, short watches) {
     
     if (watches > 4) {
-
-        watches_str[0] = '0' + (char)watches;
-        watches_str[1] = '\0';
+        snprintf(watches_str, 10, "%hd", watches);
         return;
-    }
-    else {
+    } else {
 
         short i = 0;
         while (i < watches) {
